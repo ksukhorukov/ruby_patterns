@@ -1,18 +1,20 @@
-module Observable
-    attr_reader :observers
+require 'observer'
 
-    def initialize(attrs = {})
-      @observers = []
-    end
+# module Observable
+#     attr_reader :observers
 
-    def add_observer(creature)
-      @observers << creature
-    end
+#     def initialize(attrs = {})
+#       @observers = []
+#     end
 
-    def notify_observers
-      observers.each { |observer| observer.update }
-    end
-end
+#     def add_observer(creature)
+#       @observers << creature
+#     end
+
+#     def notify_observers
+#       observers.each { |observer| observer.update }
+#     end
+# end
 
 
 class Tile 
@@ -29,6 +31,7 @@ class Tile
   end
 
   def activate_curse
+    changed
     notify_observers
   end
 
