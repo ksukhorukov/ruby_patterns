@@ -9,6 +9,15 @@ class Inventory
     @items << item
   end
 
+  def each(&block)
+    @items.each(&block)
+    # i = 0
+    # while i < @items.size
+    #   yield(@items[i])
+    #   i += 1
+    # end
+  end
+
 end
 
 class Item
