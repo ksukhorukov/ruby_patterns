@@ -1,22 +1,26 @@
 class Tile
-    attr_reader :cursed_creatures
+    attr_reader :observers
 
     def initialize(attrs = {})
       @cursed = attrs.fetch(:cursed, false)
       @hero = attrs.fetch(:hero, nil)
-      @cursed_creatures = []
+      @observers = []
     end
 
-    def add_cursed(creature)
-      @cursed_creatures << creature
+    def add_observer(creature)
+      @observers << creature
     end
 
     def cursed?
       @cursed
     end
 
+    def notify_observers
+      observers.each { |observer| observer.update }
+    end
+
     def activate_curse
-      @cursed_creatures.each { |creature| creature.damage(4) }
+      notify_observers
     end
 end
 
@@ -39,8 +43,12 @@ class Hero
   def discovers(tile)
     if tile.cursed?
       @cursed = true 
-      tile.add_cursed(self)
+      tile.add_observer(self)
     end
+  end
+
+  def update
+    damage(4)
   end
 
 end
