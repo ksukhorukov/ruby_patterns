@@ -1,9 +1,7 @@
-class Tile
+module Observable
     attr_reader :observers
 
     def initialize(attrs = {})
-      @cursed = attrs.fetch(:cursed, false)
-      @hero = attrs.fetch(:hero, nil)
       @observers = []
     end
 
@@ -11,18 +9,31 @@ class Tile
       @observers << creature
     end
 
-    def cursed?
-      @cursed
-    end
-
     def notify_observers
       observers.each { |observer| observer.update }
     end
-
-    def activate_curse
-      notify_observers
-    end
 end
+
+
+class Tile 
+
+  include Observable
+
+  def initialize(attrs = {})
+    super
+    @cursed = attrs.fetch(:cursed, false)
+  end
+
+  def cursed?
+    @cursed
+  end
+
+  def activate_curse
+    notify_observers
+  end
+
+end
+
 
 class Hero
   attr_reader :health
