@@ -5,7 +5,7 @@ describe "Iterator Pattern" do
 
   describe Inventory do 
     let(:inventory) { Inventory.new }
-    befoe :each do 
+    before :each do 
       item1 = Item.new
       item1.cost = 20
       item2 = Item.new
@@ -15,6 +15,12 @@ describe "Iterator Pattern" do
     end
 
     it "can be iterated through items to get total cost" do 
+      #result = inventory.items.inject(0) { |sum, item| sum + item.cost }
+      iterator = InventoryIterator.new(inventory)
+      result = 0
+      while iterator.has_next?
+        result += iterator.next.cost
+      end
       expect(result).to eq(30)
     end
 
