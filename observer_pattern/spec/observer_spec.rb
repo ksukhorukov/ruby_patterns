@@ -37,9 +37,19 @@ describe "Observation pattern" do
 
     it "activates curse" do 
       hero = Hero.new
-      tile = Tile.new cursed: true, hero: hero 
+      tile = Tile.new cursed: true  
+      hero.discovers(tile)
+    end
 
+    it "activates curse on several heroes" do 
+      hero1 = Hero.new
+      hero2 = Hero.new
+      tile = Tile.new cursed: true
+      hero1.discovers(tile)
+      hero2.discovers(tile)
       tile.activate_curse
+      expect(hero1.health).to eq(6)
+      expect(hero2.health).to eq(6)
     end
 
     it "is not cursed by default" do
