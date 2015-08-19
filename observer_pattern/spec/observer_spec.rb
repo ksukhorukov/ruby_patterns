@@ -4,8 +4,9 @@ require_relative '../lib/observer'
 describe "Observation pattern" do 
 
   describe Hero do 
+    let(:hero) { Hero.new }
+
     it "is cursed when discovers cursed Tile" do 
-      hero = Hero.new
       tile = Tile.new cursed: true
       hero.discovers(tile)
 
@@ -13,16 +14,34 @@ describe "Observation pattern" do
     end
 
     it "is not cursed when discovers simple Tile without curse" do 
-      hero = Hero.new
       tile = Tile.new 
       hero.discovers(tile)
 
       expect(hero.cursed?).to be_falsy
     end
 
+    it "has default health equal to 10" do 
+      expect(hero.health).to eq(10)
+    end
+
+    it "can be damaged" do 
+      hero.damage(6)
+      expect(hero.health).to eq(4)
+    end
+
+
+
   end
 
   describe Tile do 
+
+    it "activates curse" do 
+      hero = Hero.new
+      tile = Tile.new cursed: true, hero: hero 
+
+      tile.activate_curse
+    end
+
     it "is not cursed by default" do
       tile = Tile.new
       expect(tile.cursed?).to be_falsy
