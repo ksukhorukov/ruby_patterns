@@ -24,8 +24,10 @@ describe "Iterator Pattern" do
       #   result += iterator.next.cost
       # end
    
-      result = 0
-      inventory.each { |item| result += item.cost }
+      # result = 0
+      # inventory.each { |item| result += item.cost }
+
+      result = inventory.inject(0) { |sum, item| sum + item.cost }
       expect(result).to eq(30)
     end
 
