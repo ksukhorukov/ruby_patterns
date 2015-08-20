@@ -1,0 +1,1 @@
+Created once, not possible to create twice. Only one instance of a class.
