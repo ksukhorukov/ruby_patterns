@@ -1,4 +1,4 @@
-class MegaQuest
+class CompositeQuest
   attr_reader :tasks
 
   def initialize
@@ -14,20 +14,10 @@ class MegaQuest
   end
 end
 
-class Quest
-  attr_reader :tasks
+class MegaQuest < CompositeQuest
+end
 
-  def initialize
-    @tasks = []
-  end
-
-  def add(task)
-    @tasks << task
-  end
-
-  def reward
-    @tasks.inject(0) { |sum, task| sum += task.reward }
-  end
+class Quest < CompositeQuest
 end
 
 class Encounter
