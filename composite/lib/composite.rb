@@ -1,3 +1,19 @@
+class Quest
+  attr_reader :achivements
+
+  def initialize
+    @achivements = []
+  end
+
+  def add(elem)
+    @achivements << elem 
+  end
+
+  def reward
+    @achivements.inject(0) { |result, elem| result += elem.reward }
+  end
+end
+
 class Encounter
   attr_reader :reward
 
