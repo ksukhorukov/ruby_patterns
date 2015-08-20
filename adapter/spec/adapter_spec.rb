@@ -3,7 +3,7 @@ require_relative '../lib/adapter'
 
 describe "Adapter Pattern" do 
 
-  describe "Finishing quest functionality" do 
+  describe "Finishing quest" do 
     it "rewards hero with experience points" do 
       # difficulty * 50 / hero_level (default = 1)
       hero = Hero.new
@@ -13,6 +13,19 @@ describe "Adapter Pattern" do
       hero.finish_quest(quest)
 
       expect(hero.exp).to eq(250)
+    end
+  end
+
+  describe "Finishing OLD quest" do 
+    it "rewards hero with experience points" do 
+      # difficulty * 50 / hero_level (default = 1)
+      hero = Hero.new
+      quest = QuestAdapter.new(OldQuest.new, 5)
+
+      hero.take_quest(quest)
+      hero.finish_quest(quest)
+
+      expect(hero.exp).to eq(50)
     end
   end
 
