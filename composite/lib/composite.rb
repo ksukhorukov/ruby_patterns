@@ -1,16 +1,32 @@
-class Quest
-  attr_reader :achivements
+class MegaQuest
+  attr_reader :tasks
 
   def initialize
-    @achivements = []
+    @tasks = []
   end
 
-  def add(elem)
-    @achivements << elem 
+  def add(task)
+    @tasks << task
   end
 
   def reward
-    @achivements.inject(0) { |result, elem| result += elem.reward }
+    @tasks.inject(0) { |sum, task| sum += task.reward }
+  end
+end
+
+class Quest
+  attr_reader :tasks
+
+  def initialize
+    @tasks = []
+  end
+
+  def add(task)
+    @tasks << task
+  end
+
+  def reward
+    @tasks.inject(0) { |sum, task| sum += task.reward }
   end
 end
 
