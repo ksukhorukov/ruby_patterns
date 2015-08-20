@@ -1,14 +1,10 @@
 #we don't need to create this factory every time,
 #we can  create it just once and use it latter on
 
+require 'singleton'
+
 class HeroFactory
-
-  @@instance = nil
-
-  def self.instance
-    @@instance = HeroFactory.send(:new) unless @@instance
-    @@instance
-  end
+  include Singleton
 
   def create_warrior
     Warrior.new
@@ -17,8 +13,6 @@ class HeroFactory
   def create_mage
     Mage.new
   end
-
-  private_class_method :new
 end
 
 class Hero
