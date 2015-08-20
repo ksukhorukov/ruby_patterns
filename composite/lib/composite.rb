@@ -5,7 +5,7 @@ class CompositeQuest
     @tasks = []
   end
 
-  def add(task)
+  def <<(task)
     @tasks << task
   end
 
